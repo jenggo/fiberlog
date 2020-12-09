@@ -5,7 +5,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 )
@@ -43,11 +43,11 @@ func New(config ...Config) fiber.Handler {
 		sublog = *conf.Logger
 	}
 
-	return func(c *fiber.Ctx) {
+	return func(c *fiber.Ctx) error {
 		// Don't execute the middleware if Next returns true
 		if conf.Next != nil && conf.Next(c) {
 			c.Next()
-			return
+			return nil
 		}
 
 		start := time.Now()
@@ -56,11 +56,11 @@ func New(config ...Config) fiber.Handler {
 		c.Next()
 
 		msg := "Request"
-		if err := c.Error(); err != nil {
+		if err := c.Context().Err(); err != nil {
 			msg = err.Error()
 		}
 
-		code := c.Fasthttp.Response.StatusCode()
+		code := c.Response().StatusCode()
 
 		dumplogger := sublog.With().
 			Int("status", code).
@@ -79,5 +79,7 @@ func New(config ...Config) fiber.Handler {
 		default:
 			dumplogger.Info().Msg(msg)
 		}
+
+		return nil
 	}
 }

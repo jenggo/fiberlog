@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/dre1080/fiberlog"
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2"
 )
 
 func main() {
@@ -11,17 +11,18 @@ func main() {
 	// Default
 	app.Use(fiberlog.New())
 
-	app.Get("/ok", func(c *fiber.Ctx) {
+	app.Get("/ok", func(c *fiber.Ctx) error {
 		c.SendString("ok")
+		return nil
 	})
 
-	app.Get("/warn", func(c *fiber.Ctx) {
-		c.Next(fiber.ErrUnprocessableEntity)
+	app.Get("/warn", func(c *fiber.Ctx) error {
+		return fiber.ErrUnprocessableEntity
 	})
 
-	app.Get("/err", func(c *fiber.Ctx) {
-		c.Next(fiber.ErrInternalServerError)
+	app.Get("/err", func(c *fiber.Ctx) error {
+		return fiber.ErrInternalServerError
 	})
 
-	app.Listen(3000)
+	app.Listen(":3000")
 }

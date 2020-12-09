@@ -3,6 +3,6 @@ module github.com/dre1080/fiberlog
 go 1.14
 
 require (
-	github.com/gofiber/fiber v1.12.0
+	github.com/gofiber/fiber/v2 v2.2.4
 	github.com/rs/zerolog v1.19.0
 )

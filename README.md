@@ -7,7 +7,7 @@ HTTP request/response logger for [Fiber](https://github.com/gofiber/fiber) using
 ### Install
 
 ```sh
-go get -u github.com/gofiber/fiber
+go get -u github.com/gofiber/fiber/v2
 go get -u github.com/dre1080/fiberlog
 ```
 
@@ -17,7 +17,7 @@ go get -u github.com/dre1080/fiberlog
 package main
 
 import (
-  "github.com/gofiber/fiber"
+  "github.com/gofiber/fiber/v2"
   "github.com/dre1080/fiberlog"
 )
 
