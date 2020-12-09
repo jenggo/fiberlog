@@ -52,10 +52,8 @@ func New(config ...Config) fiber.Handler {
 		start := time.Now()
 
 		// handle request
-		c.Next()
-
 		msg := "Request"
-		if err := c.Context().Err(); err != nil {
+		if err := c.Next(); err != nil {
 			msg = err.Error()
 		}
 
