@@ -1,4 +1,4 @@
-module github.com/dre1080/fiberlog
+module github.com/milchinskiy/fiberlog
 
 go 1.14
 

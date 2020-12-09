@@ -2,13 +2,13 @@
 
 [![godoc](http://img.shields.io/badge/godoc-reference-blue.svg?style=flat)](https://pkg.go.dev/github.com/dre1080/fiberlog)
 
-HTTP request/response logger for [Fiber](https://github.com/gofiber/fiber) using [zerolog](https://github.com/rs/zerolog).
+HTTP request/response logger for [Fiber.v2](https://github.com/gofiber/fiber/v2) using [zerolog](https://github.com/rs/zerolog).
 
 ### Install
 
 ```sh
 go get -u github.com/gofiber/fiber/v2
-go get -u github.com/dre1080/fiberlog
+go get -u github.com/milchinskiy/fiberlog
 ```
 
 ### Usage
@@ -36,7 +36,7 @@ func main() {
     },
   }))
 
-  app.Listen(3000)
+  app.Listen(":3000")
 }
 ```
 

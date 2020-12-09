@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/dre1080/fiberlog"
+	"github.com/milchinskiy/fiberlog"
 	"github.com/gofiber/fiber/v2"
 )
 
