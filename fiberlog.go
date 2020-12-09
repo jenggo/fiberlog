@@ -46,8 +46,7 @@ func New(config ...Config) fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		// Don't execute the middleware if Next returns true
 		if conf.Next != nil && conf.Next(c) {
-			c.Next()
-			return nil
+			return c.Next()
 		}
 
 		start := time.Now()
