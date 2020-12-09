@@ -1,6 +1,6 @@
 # fiberlog
 
-[![godoc](http://img.shields.io/badge/godoc-reference-blue.svg?style=flat)](https://pkg.go.dev/github.com/dre1080/fiberlog)
+[![godoc](http://img.shields.io/badge/godoc-reference-blue.svg?style=flat)](https://pkg.go.dev/github.com/milchinskiy/fiberlog)
 
 HTTP request/response logger for [Fiber.v2](https://github.com/gofiber/fiber/v2) using [zerolog](https://github.com/rs/zerolog).
 
@@ -18,7 +18,7 @@ package main
 
 import (
   "github.com/gofiber/fiber/v2"
-  "github.com/dre1080/fiberlog"
+  "github.com/milchinskiy/fiberlog"
 )
 
 func main() {
