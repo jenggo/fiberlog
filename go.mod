@@ -1,6 +1,6 @@
-module github.com/milchinskiy/fiberlog
+module github.com/jenggo/fiberlog
 
-go 1.14
+go 1.16
 
 require (
 	github.com/gofiber/fiber/v2 v2.2.4
