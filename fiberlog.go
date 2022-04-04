@@ -60,12 +60,14 @@ func New(config ...Config) fiber.Handler {
 		code := c.Response().StatusCode()
 
 		var ip string
-		// ips := c.IPs()
-		ips := c.Get("Cf-Connecting-Ip") // Behind Cloudflare
-		if len(ips) == 0 {
-			ip = c.IP()
+		ips := c.IPs()
+		cip := c.Get("Cf-Connecting-Ip") // Behind Cloudflare
+		if len(cip) > 0 {
+			ip = cip
+		} else if len(ips) > 0 {
+			ip = ips[0]
 		} else {
-			ip = ips
+			ip = c.IP()
 		}
 
 		dumplogger := sublog.With().

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/milchinskiy/fiberlog"
 	"github.com/gofiber/fiber/v2"
+	"github.com/jenggo/fiberlog"
 )
 
 func main() {
