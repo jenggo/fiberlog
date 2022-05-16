@@ -1,7 +1,6 @@
 package fiberlog
 
 import (
-	"net"
 	"net/http"
 	"os"
 	"time"
@@ -61,18 +60,14 @@ func New(config ...Config) fiber.Handler {
 		code := c.Response().StatusCode()
 
 		var ip string
-
 		ips := c.IPs()
 		cip := c.Get("Cf-Connecting-Ip") // Behind Cloudflare
-
-		if len(cip) > 0 { // Check if cloudflare header is exists and not empty
+		if len(cip) > 0 {
 			ip = cip
 		} else if len(ips) > 0 {
-			if !privateIP(ips[0]) {
-				ip = ips[0]
-			} else {
-				ip = c.IP()
-			}
+			ip = ips[0]
+		} else {
+			ip = c.IP()
 		}
 
 		dumplogger := sublog.With().
@@ -95,9 +90,4 @@ func New(config ...Config) fiber.Handler {
 
 		return nil
 	}
-}
-
-func privateIP(ip string) bool {
-	ipAddress := net.ParseIP(ip)
-	return ipAddress.IsPrivate()
 }
