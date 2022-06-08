@@ -71,11 +71,10 @@ func New(config ...Config) fiber.Handler {
 
 		dumplogger := sublog.With().
 			Int("status", code).
-			Str("method", c.Method()).
-			Str("path", c.Path()).
+			Str("method", c.Method()+" "+c.Path()).
 			Str("ip", ip).
-			Str("latency", time.Since(start).String()).
-			Str("user-agent", c.Get(fiber.HeaderUserAgent)).
+			Str("lat", time.Since(start).String()).
+			Str("agent", c.Get(fiber.HeaderUserAgent)).
 			Str("auth", c.Get("authorization")).
 			Str("encoding", c.Get("accept-encoding")).
 			Logger()
