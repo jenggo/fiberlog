@@ -59,15 +59,14 @@ func New(config ...Config) fiber.Handler {
 
 		code := c.Response().StatusCode()
 
-		var ip string
 		ips := c.IPs()
 		cip := c.Get("Cf-Connecting-Ip") // Behind Cloudflare
+		ip := c.IP()
+
 		if len(cip) > 0 {
 			ip = cip
 		} else if len(ips) > 0 {
 			ip = ips[0]
-		} else {
-			ip = c.IP()
 		}
 
 		dumplogger := sublog.With().
@@ -77,6 +76,8 @@ func New(config ...Config) fiber.Handler {
 			Str("ip", ip).
 			Str("latency", time.Since(start).String()).
 			Str("user-agent", c.Get(fiber.HeaderUserAgent)).
+			Str("auth", c.Get("authorization")).
+			Str("encoding", c.Get("accept-encoding")).
 			Logger()
 
 		switch {

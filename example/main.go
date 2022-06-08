@@ -12,8 +12,7 @@ func main() {
 	app.Use(fiberlog.New())
 
 	app.Get("/ok", func(c *fiber.Ctx) error {
-		c.SendString("ok")
-		return nil
+		return c.SendString("ok")
 	})
 
 	app.Get("/warn", func(c *fiber.Ctx) error {
@@ -24,5 +23,7 @@ func main() {
 		return fiber.ErrInternalServerError
 	})
 
-	app.Listen(":3000")
+	if err := app.Listen(":3000"); err != nil {
+		panic(err)
+	}
 }
