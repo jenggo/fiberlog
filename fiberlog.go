@@ -38,7 +38,7 @@ func New(config ...Config) fiber.Handler {
 
 	var sublog zerolog.Logger
 	if conf.Logger == nil {
-		sublog = log.Logger.Output(zerolog.ConsoleWriter{Out: os.Stderr})
+		sublog = log.Logger.Output(zerolog.ConsoleWriter{Out: os.Stderr, TimeFormat: "2006-01-02 15:04:05"})
 	} else {
 		sublog = *conf.Logger
 	}
