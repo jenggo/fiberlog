@@ -23,13 +23,13 @@ type Config struct {
 
 // New is a zerolog middleware that allows you to pass a Config.
 //
-// 	app := fiber.New()
+//	app := fiber.New()
 //
-// 	// Without config
-// 	app.Use(New())
+//	// Without config
+//	app.Use(New())
 //
-// 	// With config
-// 	app.Use(New(Config{Logger: &zerolog.New(os.Stdout)}))
+//	// With config
+//	app.Use(New(Config{Logger: &zerolog.New(os.Stdout)}))
 func New(config ...Config) fiber.Handler {
 	var conf Config
 	if len(config) > 0 {
@@ -75,9 +75,12 @@ func New(config ...Config) fiber.Handler {
 			Str("ip", ip).
 			Str("lat", time.Since(start).String()).
 			Str("agent", c.Get(fiber.HeaderUserAgent)).
-			Str("auth", c.Get("authorization")).
 			Str("encoding", c.Get("accept-encoding")).
 			Logger()
+
+		if c.Get("authorization") != "" {
+			dumplogger.With().Str("auth", c.Get("authorization"))
+		}
 
 		switch {
 		case code >= fiber.StatusBadRequest && code < fiber.StatusInternalServerError:
