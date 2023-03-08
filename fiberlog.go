@@ -73,7 +73,7 @@ func New(config ...Config) fiber.Handler {
 			Int("status", code).
 			Str("method", c.Method()+" "+c.Path()).
 			Str("ip", ip).
-			Str("lat", time.Since(start).String()).
+			Str("ltc", time.Since(start).String()).
 			Str("agent", c.Get(fiber.HeaderUserAgent)).
 			Str("encoding", c.Get("accept-encoding")).
 			Logger()
